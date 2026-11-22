@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { isValidWord, SINGLE_LETTER_WORDS } from "../utils/validations";
 import { validateWord } from "../services/api";
 import { normalizeWord } from "../utils/normalizeWord";
@@ -6,9 +6,15 @@ import { normalizeWord } from "../utils/normalizeWord";
 const Game = () => {
   const [input, setInput] = useState("");
   const [words, setWords] = useState([]);
+  const [validating, setValidating] = useState(false);
   const [error, setError] = useState(null);
 
+  const inputRef = useRef(null);
   const score = words.reduce((sum, word) => sum + word.length, 0);
+
+  useEffect(() => {
+    if (!validating) inputRef.current?.focus();
+  }, [validating]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,6 +40,8 @@ const Game = () => {
     )
       return setError("¡La palabra no se encadena con la anterior!");
 
+    setValidating(true);
+
     validateWord(playingWord)
       .then((res) => {
         if (res.data.exists) {
@@ -44,7 +52,8 @@ const Game = () => {
           setInput("");
         }
       })
-      .catch((err) => setError(err.message));
+      .catch((err) => setError(err.message))
+      .finally(() => setValidating(false));
   };
 
   return (
@@ -56,8 +65,10 @@ const Game = () => {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          ref={inputRef}
+          disabled={validating}
         />
-        <button>Enviar</button>
+        <button disabled={validating}>Enviar</button>
       </form>
       {error && <p>{error}</p>}
       <p>{words.join(" → ")}</p>
