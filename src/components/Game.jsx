@@ -2,12 +2,16 @@ import { useEffect, useRef, useState } from "react";
 import { isValidWord, SINGLE_LETTER_WORDS } from "../utils/validations";
 import { validateWord } from "../services/api";
 import { normalizeWord } from "../utils/normalizeWord";
+import { useTimer } from "../hooks/useTimer";
+
+const TURN_SECONDS = 15;
 
 const Game = () => {
   const [input, setInput] = useState("");
   const [words, setWords] = useState([]);
   const [validating, setValidating] = useState(false);
   const [error, setError] = useState(null);
+  const { timeLeft, isOver, restart } = useTimer(TURN_SECONDS, validating);
 
   const inputRef = useRef(null);
   const score = words.reduce((sum, word) => sum + word.length, 0);
@@ -18,6 +22,9 @@ const Game = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (isOver) return;
+
     const playingWord = input.toLowerCase().trim();
 
     setError(null);
@@ -46,6 +53,7 @@ const Game = () => {
       .then((res) => {
         if (res.data.exists) {
           setWords((prev) => [...prev, playingWord]);
+          restart();
           setInput("");
         } else {
           setError("¡La palabra no existe!");
@@ -66,13 +74,14 @@ const Game = () => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           ref={inputRef}
-          disabled={validating}
+          disabled={validating || isOver}
         />
-        <button disabled={validating}>Enviar</button>
+        <button disabled={validating || isOver}>Enviar</button>
       </form>
       {error && <p>{error}</p>}
       <p>{words.join(" → ")}</p>
       <p>Puntaje:{score}</p>
+      <div>{timeLeft}</div>
     </div>
   );
 };
