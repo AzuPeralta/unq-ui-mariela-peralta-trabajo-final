@@ -28,8 +28,8 @@ export const Game = () => {
     words.length > 0 ? normalizeWord(words.at(-1)).at(-1) : null;
 
   useEffect(() => {
-    if (!validating) inputRef.current?.focus();
-  }, [validating]);
+    if (!validating && !isOver) inputRef.current?.focus();
+  }, [validating, isOver]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -68,7 +68,7 @@ export const Game = () => {
           setInput("");
         }
       })
-      .catch((err) => setError(err.message))
+      .catch(() => setError("No se pudo validar la palabra. Probá de nuevo."))
       .finally(() => setValidating(false));
   };
 
@@ -84,7 +84,10 @@ export const Game = () => {
       <WordForm
         onSubmit={handleSubmit}
         value={input}
-        onChange={(e) => setInput(e.target.value)}
+        onChange={(e) => {
+          setInput(e.target.value);
+          setError(null);
+        }}
         ref={inputRef}
         disabled={validating || isOver}
         validating={validating}
@@ -105,4 +108,3 @@ export const Game = () => {
     </div>
   );
 };
-
