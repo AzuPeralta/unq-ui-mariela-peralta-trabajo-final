@@ -4,6 +4,7 @@ import { validateWord } from "../services/api";
 import { normalizeWord } from "../utils/normalizeWord";
 import { useTimer } from "../hooks/useTimer";
 import { GameOver } from "./GameOver";
+import { Timer } from "./Timer";
 
 const TURN_SECONDS = 15;
 
@@ -89,7 +90,7 @@ const Game = () => {
       {error && <p>{error}</p>}
       <p>{words.join(" → ")}</p>
       <p>Puntaje:{score}</p>
-      <div>{timeLeft}</div>
+      <Timer time={timeLeft} waiting={words.length === 0}/>
 
       {isOver && <GameOver wordCount={words.length} score={score} onRestart={handleReset} />}
     </div>

@@ -1,7 +1,7 @@
-
-export const Timer = () => {
-
-    return (
-        <div>Acá va el tiempo</div>
-    )
-}
+export const Timer = ({ time, waiting }) => {
+  return (
+    <div>
+      {waiting ? <p>Esperando tu primera palabra...</p> : <p>Tiempo: {time}</p>}
+    </div>
+  );
+};
