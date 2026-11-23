@@ -15,3 +15,7 @@ export const saveNewScore = (newScore) => {
   localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(updatedScores));
   return updatedScores;
 };
+
+export const isTopScore = (score, scores) => {
+  return scores.length < MAX_SCORES || score > scores.at(-1).score;
+};

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getLeaderBoard, saveNewScore } from "../services/leaderboardStorage";
+import { getLeaderBoard, saveNewScore, isTopScore } from "../services/leaderboardStorage";
 import { isValidInitials } from "../utils/validations";
 import { Leaderboard } from "./Leaderboard";
 
@@ -25,6 +25,8 @@ export const GameOver = ({ wordCount, score, onRestart }) => {
     setSaved(true);
   };
 
+  const isTop10 = isTopScore(score, leaderboard);
+
   return (
     <div>
       <div>
@@ -34,7 +36,7 @@ export const GameOver = ({ wordCount, score, onRestart }) => {
         <button onClick={onRestart}>Jugar otra vez</button>
       </div>
 
-      {!saved && (
+      {!saved && isTop10 && (
         <form onSubmit={handleSave}>
           <h2>¡Guardá tu puntaje!</h2>
           <input
