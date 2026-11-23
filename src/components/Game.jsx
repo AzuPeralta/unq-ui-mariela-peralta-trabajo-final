@@ -83,6 +83,10 @@ export const Game = () => {
     <main className="cabinet">
       <h1 className="cabinet-title">PALABRAS ENCADENADAS</h1>
       <section className="screen">
+        <div className="hud">
+          <Score score={score} />
+          <Timer time={timeLeft} waiting={words.length === 0} />
+        </div>
         <WordForm
           onSubmit={handleSubmit}
           value={input}
@@ -97,8 +101,6 @@ export const Game = () => {
         />
         <WordChain words={words} />
         <ErrorMessage message={error} />
-        <Score score={score} />
-        <Timer time={timeLeft} waiting={words.length === 0} />
 
         {isOver && (
           <GameOver

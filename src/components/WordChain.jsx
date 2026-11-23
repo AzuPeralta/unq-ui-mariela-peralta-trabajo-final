@@ -6,5 +6,24 @@ export const WordChain = ({ words }) => {
         palabra válida.
       </p>
     );
-  return <p>{words.join(" → ")}</p>;
+  return (
+    <div>
+      <p className="chain-label">
+        CADENA: {words.length} {words.length === 1 ? "PALABRA" : "PALABRAS"}
+      </p>
+
+      <div className="chain-box">
+        <ul className="chain">
+          {words.map((word, index) => (
+            <li
+              key={word}
+              className={index === words.length - 1 ? "chip chip-last" : "chip"}
+            >
+              {word}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
 };

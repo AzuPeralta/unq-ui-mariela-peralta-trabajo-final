@@ -1,3 +1,3 @@
 export const Score = ({ score }) => {
-  return <p>Puntaje: {score}</p>;
+  return <p className="hud-box">Puntaje: {score}</p>;
 };
