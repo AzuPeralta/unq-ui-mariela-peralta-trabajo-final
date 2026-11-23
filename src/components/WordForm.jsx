@@ -8,10 +8,10 @@ export const WordForm = ({
   nextLetter,
 }) => {
   return (
-    <form onSubmit={onSubmit}>
+    <form className="word-form" onSubmit={onSubmit}>
       <input
+        className="word-input"
         aria-label="palabra"
-        size={40}
         type="text"
         value={value}
         onChange={onChange}
@@ -23,7 +23,7 @@ export const WordForm = ({
             : "Acá va tu palabra"
         }
       />
-      <button disabled={disabled}>
+      <button className="arcade-button" disabled={disabled}>
         {validating ? "Validando..." : "Enviar"}
       </button>
     </form>

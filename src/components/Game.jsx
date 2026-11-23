@@ -80,34 +80,36 @@ export const Game = () => {
   };
 
   return (
-    <main className="cabinet">
+    <main className={isOver ? "cabinet cabinet-wide" : "cabinet"}>
       <h1 className="cabinet-title">PALABRAS ENCADENADAS</h1>
       <section className="screen">
-        <div className="hud">
-          <Score score={score} />
-          <Timer time={timeLeft} waiting={words.length === 0} />
-        </div>
-        <WordForm
-          onSubmit={handleSubmit}
-          value={input}
-          onChange={(e) => {
-            setInput(e.target.value);
-            setError(null);
-          }}
-          ref={inputRef}
-          disabled={validating || isOver}
-          validating={validating}
-          nextLetter={nextLetter}
-        />
-        <WordChain words={words} />
-        <ErrorMessage message={error} />
-
-        {isOver && (
+        {isOver ? (
           <GameOver
             wordCount={words.length}
             score={score}
             onRestart={handleReset}
           />
+        ) : (
+          <>
+            <div className="hud">
+              <Score score={score} />
+              <Timer time={timeLeft} waiting={words.length === 0} />
+            </div>
+            <WordForm
+              onSubmit={handleSubmit}
+              value={input}
+              onChange={(e) => {
+                setInput(e.target.value);
+                setError(null);
+              }}
+              ref={inputRef}
+              disabled={validating}
+              validating={validating}
+              nextLetter={nextLetter}
+            />
+            <WordChain words={words} />
+            <ErrorMessage message={error} />
+          </>
         )}
       </section>
     </main>

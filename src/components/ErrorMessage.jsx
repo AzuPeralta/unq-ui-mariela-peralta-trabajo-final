@@ -1,5 +1,5 @@
 export const ErrorMessage = ({ message }) => {
   if (!message) return null;
 
-  return <p>{message}</p>;
+  return <p className="error-message" role="alert">{message}</p>;
 };

@@ -1,7 +1,12 @@
 import { useState } from "react";
-import { getLeaderBoard, saveNewScore, isTopScore } from "../services/leaderboardStorage";
+import {
+  getLeaderBoard,
+  saveNewScore,
+  isTopScore,
+} from "../services/leaderboardStorage";
 import { isValidInitials } from "../utils/validations";
 import { Leaderboard } from "./Leaderboard";
+import { ErrorMessage } from "./ErrorMessage";
 
 export const GameOver = ({ wordCount, score, onRestart }) => {
   const [initials, setInitials] = useState("");
@@ -28,29 +33,48 @@ export const GameOver = ({ wordCount, score, onRestart }) => {
   const isTop10 = isTopScore(score, leaderboard);
 
   return (
-    <div>
-      <div>
-        <h2>¡Terminó tu partida!</h2>
-        <p>Encadenaste {wordCount} palabras</p>
-        <p>Tu puntaje final es {score}</p>
-        <button onClick={onRestart}>Jugar otra vez</button>
-      </div>
+    <div className="game-over">
+      <div className="game-over-left">
+        <h2 className="game-over-title">GAME OVER</h2>
 
-      {!saved && isTop10 && (
-        <form onSubmit={handleSave}>
-          <h2>¡Guardá tu puntaje!</h2>
-          <input
-            aria-label="iniciales"
-            type="text"
-            value={initials}
-            onChange={(e) => setInitials(e.target.value)}
-            maxLength={3}
-            placeholder="Ingresá tus iniciales"
-          />
-          {error && <p>{error}</p>}
-          <button>Enviar</button>
-        </form>
-      )}
+        <div className="stats">
+          <div className="hud-box stat-box">
+            <span className="stat-label">PALABRAS</span>
+            <span className="stat-value">{wordCount}</span>
+          </div>
+
+          <div className="hud-box stat-box">
+            <span className="stat-label">PUNTAJE FINAL</span>
+            <span className="stat-value">{score}</span>
+          </div>
+        </div>
+
+        {!saved && isTop10 && (
+          <form className="initials-form" onSubmit={handleSave}>
+            <label htmlFor="initials" className="initials-label">
+              ¡NUEVO RÉCORD! INGRESÁ TUS INICIALES:
+            </label>
+            <div className="initials-row">
+              <input
+                id="initials"
+                className="word-input initials-input"
+                type="text"
+                value={initials}
+                onChange={(e) => setInitials(e.target.value)}
+                maxLength={3}
+                placeholder="ABC"
+              />
+              <button className="arcade-button">Guardar</button>
+            </div>
+
+            <ErrorMessage message={error} />
+          </form>
+        )}
+
+        <button className="arcade-button play-again" onClick={onRestart}>
+          ▶ Jugar otra vez
+        </button>
+      </div>
 
       <Leaderboard scores={leaderboard} />
     </div>
