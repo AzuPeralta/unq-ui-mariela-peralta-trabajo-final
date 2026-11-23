@@ -5,18 +5,27 @@ import { normalizeWord } from "../utils/normalizeWord";
 import { useTimer } from "../hooks/useTimer";
 import { GameOver } from "./GameOver";
 import { Timer } from "./Timer";
+import { Score } from "./Score";
+import { ErrorMessage } from "./ErrorMessage";
+import { WordChain } from "./WordChain";
+import { WordForm } from "./WordForm";
 
 const TURN_SECONDS = 15;
 
-const Game = () => {
+export const Game = () => {
   const [input, setInput] = useState("");
   const [words, setWords] = useState([]);
   const [validating, setValidating] = useState(false);
   const [error, setError] = useState(null);
-  const { timeLeft, isOver, restart, reset } = useTimer(TURN_SECONDS, validating);
+  const { timeLeft, isOver, restart, reset } = useTimer(
+    TURN_SECONDS,
+    validating,
+  );
 
   const inputRef = useRef(null);
   const score = words.reduce((sum, word) => sum + word.length, 0);
+  const nextLetter =
+    words.length > 0 ? normalizeWord(words.at(-1)).at(-1) : null;
 
   useEffect(() => {
     if (!validating) inputRef.current?.focus();
@@ -43,10 +52,7 @@ const Game = () => {
     if (words.some((word) => normalizeWord(word) === normalizedWord))
       return setError("¡La palabra ya fue utilizada!");
 
-    if (
-      words.length > 0 &&
-      normalizeWord(words.at(-1)).at(-1) !== normalizedWord[0]
-    )
+    if (nextLetter && nextLetter !== normalizedWord[0])
       return setError("¡La palabra no se encadena con la anterior!");
 
     setValidating(true);
@@ -71,30 +77,32 @@ const Game = () => {
     setInput("");
     setError(null);
     reset();
-  }
+  };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="Input"></label>
-        <input
-          id="Input"
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          ref={inputRef}
-          disabled={validating || isOver}
-        />
-        <button disabled={validating || isOver}>Enviar</button>
-      </form>
-      {error && <p>{error}</p>}
-      <p>{words.join(" → ")}</p>
-      <p>Puntaje:{score}</p>
-      <Timer time={timeLeft} waiting={words.length === 0}/>
+      <WordForm
+        onSubmit={handleSubmit}
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        ref={inputRef}
+        disabled={validating || isOver}
+        validating={validating}
+        nextLetter={nextLetter}
+      />
+      <WordChain words={words} />
+      <ErrorMessage message={error} />
+      <Score score={score} />
+      <Timer time={timeLeft} waiting={words.length === 0} />
 
-      {isOver && <GameOver wordCount={words.length} score={score} onRestart={handleReset} />}
+      {isOver && (
+        <GameOver
+          wordCount={words.length}
+          score={score}
+          onRestart={handleReset}
+        />
+      )}
     </div>
   );
 };
 
-export default Game;
