@@ -16,8 +16,13 @@ export const useTimer = (seconds, paused) => {
     setIsTicking(true);
   };
 
+  const reset = () => {
+    setTimeLeft(seconds);
+    setIsTicking(false);
+  }
+
   const isRunning = isTicking && timeLeft > 0;
   const isOver = isTicking && timeLeft === 0;
 
-  return { timeLeft, isRunning, isOver, restart };
+  return { timeLeft, isRunning, isOver, restart, reset };
 };
