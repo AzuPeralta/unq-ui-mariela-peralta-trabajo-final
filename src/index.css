@@ -436,3 +436,29 @@ p {
 .arcade-button-secondary {
   background-color: var(--color-screen);
 }
+
+.timer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.timer-lives {
+  display: flex;
+  gap: 3px;
+}
+
+.timer-heart {
+  width: 14px;
+  height: 12px;
+  background-color: var(--color-screen);
+  mask: url("./assets/icons/heart.svg") no-repeat center / contain;
+}
+
+.timer-heart-on {
+  background-color: var(--color-highlight);
+}
+
+.timer-lives-low .timer-heart-on {
+  background-color: var(--color-error);
+}

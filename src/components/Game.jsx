@@ -110,7 +110,7 @@ export const Game = () => {
           <>
             <div className="hud">
               <Score score={score} />
-              <Timer time={timeLeft} waiting={words.length === 0} />
+              <Timer time={timeLeft} total={TURN_SECONDS} waiting={words.length === 0} />
             </div>
             <WordForm
               onSubmit={handleSubmit}
