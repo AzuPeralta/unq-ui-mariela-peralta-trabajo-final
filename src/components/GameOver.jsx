@@ -52,7 +52,7 @@ export const GameOver = ({ wordCount, score, onRestart }) => {
         {!saved && isTop10 && (
           <form className="initials-form" onSubmit={handleSave}>
             <label htmlFor="initials" className="initials-label">
-              ¡NUEVO RÉCORD! INGRESÁ TUS INICIALES:
+              ¡NUEVO RECORD! INGRESA TUS INICIALES:
             </label>
             <div className="initials-row">
               <input

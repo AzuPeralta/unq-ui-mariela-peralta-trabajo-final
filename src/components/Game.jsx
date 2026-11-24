@@ -9,6 +9,10 @@ import { Score } from "./Score";
 import { ErrorMessage } from "./ErrorMessage";
 import { WordChain } from "./WordChain";
 import { WordForm } from "./WordForm";
+import { ControlPanel } from "./ControlPanel";
+import { RulesModal } from "./RulesModal";
+import { RecordsModal } from "./RecordsModal";
+import { RestartModal } from "./RestartModal";
 
 const TURN_SECONDS = 15;
 
@@ -16,10 +20,11 @@ export const Game = () => {
   const [input, setInput] = useState("");
   const [words, setWords] = useState([]);
   const [validating, setValidating] = useState(false);
+  const [modal, setModal] = useState(null);
   const [error, setError] = useState(null);
   const { timeLeft, isOver, restart, reset } = useTimer(
     TURN_SECONDS,
-    validating,
+    validating || modal !== null,
   );
 
   const inputRef = useRef(null);
@@ -79,6 +84,18 @@ export const Game = () => {
     reset();
   };
 
+  const closeModal = () => setModal(null);
+
+  const handleRestartClick = () => {
+    if (words.length === 0) return handleReset();
+    setModal("restart");
+  };
+
+  const handleConfirmRestart = () => {
+    handleReset();
+    closeModal();
+  };
+
   return (
     <main className={isOver ? "cabinet cabinet-wide" : "cabinet"}>
       <h1 className="cabinet-title">PALABRAS ENCADENADAS</h1>
@@ -112,6 +129,23 @@ export const Game = () => {
           </>
         )}
       </section>
+      {!isOver && (
+        <ControlPanel
+          onRules={() => setModal("rules")}
+          onRecords={() => setModal("records")}
+          onRestart={handleRestartClick}
+        />
+      )}
+      {modal === "rules" && <RulesModal onClose={closeModal} />}
+      {modal === "records" && <RecordsModal onClose={closeModal} />}
+      {modal === "restart" && (
+        <RestartModal
+          wordCount={words.length}
+          score={score}
+          onCancel={closeModal}
+          onConfirm={handleConfirmRestart}
+        />
+      )}
     </main>
   );
 };

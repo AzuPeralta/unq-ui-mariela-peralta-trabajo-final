@@ -1,7 +1,7 @@
-export const Leaderboard = ({ scores }) => {
+export const Leaderboard = ({ scores, showTitle = true }) => {
   return (
     <div className="leaderboard">
-      <h2 className="leaderboard-title">HIGH SCORES</h2>
+      {showTitle && <h2 className="leaderboard-title">HIGH SCORES</h2>}
       {scores.length === 0 ? (
         <p>Todavía no hay puntajes</p>
       ) : (
@@ -9,9 +9,9 @@ export const Leaderboard = ({ scores }) => {
           <thead>
             <tr>
               <th>#</th>
-              <th>Jugador</th>
-              <th>Palabras</th>
-              <th>Puntos</th>
+              <th>JUGADOR</th>
+              <th>PALABRAS</th>
+              <th>PUNTOS</th>
             </tr>
           </thead>
 
