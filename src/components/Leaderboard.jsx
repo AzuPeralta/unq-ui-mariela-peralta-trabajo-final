@@ -1,11 +1,11 @@
 export const Leaderboard = ({ scores, showTitle = true }) => {
   return (
-    <div className="leaderboard">
+    <div className="d-flex flex-column gap-3">
       {showTitle && <h2 className="leaderboard-title">HIGH SCORES</h2>}
       {scores.length === 0 ? (
         <p>Todavía no hay puntajes</p>
       ) : (
-        <table className="leaderboard-table">
+        <table className="leaderboard-table w-100">
           <thead>
             <tr>
               <th>#</th>

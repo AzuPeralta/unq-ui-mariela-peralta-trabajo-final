@@ -33,28 +33,34 @@ export const GameOver = ({ wordCount, score, onRestart }) => {
   const isTop10 = isTopScore(score, leaderboard);
 
   return (
-    <div className="game-over">
-      <div className="game-over-left">
+    <div className="row g-4">
+      <div className="col-12 col-md-6 d-flex flex-column gap-3">
         <h2 className="game-over-title">GAME OVER</h2>
 
-        <div className="stats">
-          <div className="hud-box stat-box">
-            <span className="stat-label">PALABRAS</span>
-            <span className="stat-value">{wordCount}</span>
+        <div className="row g-2">
+          <div className="col-6">
+            <div className="hud-box d-flex flex-column gap-1">
+              <span className="stat-label">PALABRAS</span>
+              <span className="stat-value">{wordCount}</span>
+            </div>
           </div>
-
-          <div className="hud-box stat-box">
-            <span className="stat-label">PUNTAJE FINAL</span>
-            <span className="stat-value">{score}</span>
+          <div className="col-6">
+            <div className="hud-box d-flex flex-column gap-1">
+              <span className="stat-label">PUNTAJE FINAL</span>
+              <span className="stat-value">{score}</span>
+            </div>
           </div>
         </div>
 
         {!saved && isTop10 && (
-          <form className="initials-form" onSubmit={handleSave}>
+          <form
+            className="initials-form d-flex flex-column gap-2"
+            onSubmit={handleSave}
+          >
             <label htmlFor="initials" className="initials-label">
               ¡NUEVO RECORD! INGRESA TUS INICIALES:
             </label>
-            <div className="initials-row">
+            <div className="d-flex gap-2">
               <input
                 id="initials"
                 className="word-input initials-input"
@@ -71,12 +77,14 @@ export const GameOver = ({ wordCount, score, onRestart }) => {
           </form>
         )}
 
-        <button className="arcade-button play-again" onClick={onRestart}>
+        <button className="arcade-button align-self-start" onClick={onRestart}>
           ▶ Jugar otra vez
         </button>
       </div>
 
-      <Leaderboard scores={leaderboard} />
+      <div className="col-12 col-md-6">
+        <Leaderboard scores={leaderboard} />
+      </div>
     </div>
   );
 };
