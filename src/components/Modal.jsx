@@ -16,7 +16,7 @@ export const Modal = ({ title, onClose, children }) => {
       onClose={onClose}
       aria-labelledby="arcade-modal-title"
     >
-      <div className="arcade-modal-header">
+      <div className="arcade-modal-header d-flex justify-content-between align-items-center">
         <h2 id="arcade-modal-title" className="arcade-modal-title">
           {title}
         </h2>
@@ -30,7 +30,7 @@ export const Modal = ({ title, onClose, children }) => {
         </button>
       </div>
 
-      <div className="arcade-modal-body">{children}</div>
+      <div className="arcade-modal-body d-flex flex-column gap-3">{children}</div>
     </dialog>
   );
 };

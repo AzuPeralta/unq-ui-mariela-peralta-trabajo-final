@@ -239,18 +239,7 @@ p {
   background-color: var(--color-pink-light);
 }
 
-.control-panel {
-  display: flex;
-  justify-content: flex-end;
-  gap: 22px;
-  padding: 4px 24px 0;
-}
-
 .control {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
   font-size: 20px;
 }
 
@@ -261,9 +250,6 @@ p {
   border: 4px solid var(--color-text);
   box-shadow: 0 5px 0 var(--color-text);
   padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
 }
 
@@ -300,9 +286,6 @@ p {
 }
 
 .arcade-modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   background-color: var(--color-accent);
   border-bottom: 4px solid var(--color-text);
   padding: 12px 14px 12px 20px;
@@ -325,18 +308,12 @@ p {
 }
 
 .arcade-modal-body {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
   padding: 20px 24px 24px;
 }
 
 .rules-list {
   margin: 0;
   padding-left: 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
   line-height: 1.1;
 }
 
@@ -344,12 +321,6 @@ p {
   background-color: var(--color-pink-light);
   border: 3px dashed var(--color-text);
   padding: 8px 12px;
-}
-
-.arcade-modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 14px;
 }
 
 .arcade-button-secondary {

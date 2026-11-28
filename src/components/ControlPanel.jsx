@@ -4,11 +4,11 @@ import restart from "../assets/icons/restart.svg";
 
 export const ControlPanel = ({ onRules, onRecords, onRestart }) => {
   return (
-    <div className="control-panel">
-      <div className="control">
+    <div className="d-flex justify-content-end gap-4 pt-1 px-4">
+      <div className="control d-flex flex-column align-items-center gap-1">
         <button
           type="button"
-          className="round-button round-button-rules"
+          className="round-button round-button-rules d-flex align-items-center justify-content-center"
           aria-label="Ver las reglas"
           onClick={onRules}
         >
@@ -17,10 +17,10 @@ export const ControlPanel = ({ onRules, onRecords, onRestart }) => {
         <span>REGLAS</span>
       </div>
 
-      <div className="control">
+      <div className="control d-flex flex-column align-items-center gap-1">
         <button
           type="button"
-          className="round-button round-button-records"
+          className="round-button round-button-records d-flex align-items-center justify-content-center"
           aria-label="Ver tabla de posiciones"
           onClick={onRecords}
         >
@@ -29,10 +29,10 @@ export const ControlPanel = ({ onRules, onRecords, onRestart }) => {
         <span>RECORDS</span>
       </div>
 
-      <div className="control">
+      <div className="control d-flex flex-column align-items-center gap-1">
         <button
           type="button"
-          className="round-button round-button-restart"
+          className="round-button round-button-restart d-flex align-items-center justify-content-center"
           aria-label="Empezar de nuevo"
           onClick={onRestart}
         >
