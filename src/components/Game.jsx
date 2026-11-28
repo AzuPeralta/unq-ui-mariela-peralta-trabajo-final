@@ -108,7 +108,7 @@ export const Game = () => {
           />
         ) : (
           <>
-            <div className="hud d-flex justify-content-between">
+            <div className="hud d-flex flex-wrap justify-content-between gap-2">
               <Score score={score} />
               <Timer time={timeLeft} total={TURN_SECONDS} waiting={words.length === 0} />
             </div>

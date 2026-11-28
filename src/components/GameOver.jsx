@@ -60,7 +60,7 @@ export const GameOver = ({ wordCount, score, onRestart }) => {
             <label htmlFor="initials" className="initials-label">
               ¡NUEVO RECORD! INGRESA TUS INICIALES:
             </label>
-            <div className="d-flex gap-2">
+            <div className="d-flex flex-wrap gap-2">
               <input
                 id="initials"
                 className="word-input initials-input"

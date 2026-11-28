@@ -8,7 +8,7 @@ export const WordForm = ({
   nextLetter,
 }) => {
   return (
-    <form className="d-flex gap-3" onSubmit={onSubmit}>
+    <form className="d-flex flex-column flex-sm-row gap-3" onSubmit={onSubmit}>
       <input
         className="word-input flex-grow-1"
         aria-label="palabra"

@@ -4,7 +4,7 @@ import restart from "../assets/icons/restart.svg";
 
 export const ControlPanel = ({ onRules, onRecords, onRestart }) => {
   return (
-    <div className="d-flex justify-content-end gap-4 pt-1 px-4">
+    <div className="d-flex justify-content-center justify-content-sm-end gap-4 pt-1 px-sm-4">
       <div className="control d-flex flex-column align-items-center gap-1">
         <button
           type="button"
