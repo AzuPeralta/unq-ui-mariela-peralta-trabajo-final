@@ -12,12 +12,12 @@ export const WordChain = ({ words }) => {
         CADENA: {words.length} {words.length === 1 ? "PALABRA" : "PALABRAS"}
       </p>
 
-      <div className="chain-box">
-        <ul className="chain">
+      <div className="chain-box d-flex flex-column-reverse">
+        <ul className="list-unstyled m-0 d-flex flex-wrap gap-2">
           {words.map((word, index) => {
             const isLast = index === words.length - 1;
             return (
-              <li key={word} className="chain-item">
+              <li key={word} className="d-flex align-items-center gap-2">
                 <span className={isLast ? "chip chip-last" : "chip"}>
                   {word}
                 </span>

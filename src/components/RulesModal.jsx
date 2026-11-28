@@ -12,8 +12,8 @@ export const RulesModal = ({ onClose }) => {
         <li>Cada letra suma 1 punto</li>
         <li>Tenés 15 segundos por palabra. Cada palabra válida vuelve el tiempo a 15</li>
       </ol>
-      <p className="modal-note">El tiempo está en pausa mientras leés</p>
-      <div className="modal-actions">
+      <p className="arcade-modal-note">El tiempo está en pausa mientras leés</p>
+      <div className="arcade-modal-actions">
         <button type="button" className="arcade-button" onClick={onClose}>
           ¡A jugar!
         </button>

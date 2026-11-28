@@ -12,17 +12,17 @@ export const Modal = ({ title, onClose, children }) => {
   return (
     <dialog
       ref={dialogRef}
-      className="modal"
+      className="arcade-modal"
       onClose={onClose}
-      aria-labelledby="modal-title"
+      aria-labelledby="arcade-modal-title"
     >
-      <div className="modal-header">
-        <h2 id="modal-title" className="modal-title">
+      <div className="arcade-modal-header">
+        <h2 id="arcade-modal-title" className="arcade-modal-title">
           {title}
         </h2>
         <button
           type="button"
-          className="modal-close"
+          className="arcade-modal-close"
           aria-label="Cerrar"
           onClick={onClose}
         >
@@ -30,7 +30,7 @@ export const Modal = ({ title, onClose, children }) => {
         </button>
       </div>
 
-      <div className="modal-body">{children}</div>
+      <div className="arcade-modal-body">{children}</div>
     </dialog>
   );
 };

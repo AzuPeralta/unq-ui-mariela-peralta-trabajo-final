@@ -11,11 +11,11 @@ export const Timer = ({ time, total, waiting }) => {
   const hearts = Array.from({ length: total }, (_, index) => index < time);
 
   return (
-    <div className="hud-box timer">
+    <div className="hud-box d-flex flex-column gap-1">
       <p>Tiempo: {String(time).padStart(4, "0")}</p>
       <div
         className={
-          time <= LOW_TIME ? "timer-lives timer-lives-low" : "timer-lives"
+          time <= LOW_TIME ? "d-flex gap-1 timer-lives-low" : "d-flex gap-1"
         }
         aria-hidden="true"
       >

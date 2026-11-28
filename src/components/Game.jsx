@@ -97,9 +97,9 @@ export const Game = () => {
   };
 
   return (
-    <main className={isOver ? "cabinet cabinet-wide" : "cabinet"}>
+    <main className={`cabinet d-flex flex-column gap-3 ${isOver ? "cabinet-wide" : ""}`}>
       <h1 className="cabinet-title">PALABRAS ENCADENADAS</h1>
-      <section className="screen">
+      <section className="screen d-flex flex-column gap-3">
         {isOver ? (
           <GameOver
             wordCount={words.length}
@@ -108,7 +108,7 @@ export const Game = () => {
           />
         ) : (
           <>
-            <div className="hud">
+            <div className="hud d-flex justify-content-between">
               <Score score={score} />
               <Timer time={timeLeft} total={TURN_SECONDS} waiting={words.length === 0} />
             </div>

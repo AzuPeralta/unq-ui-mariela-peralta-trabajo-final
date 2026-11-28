@@ -8,7 +8,7 @@ export const RestartModal = ({ wordCount, score, onCancel, onConfirm }) => {
         {wordCount === 1 ? "palabra" : "palabras"} y {score} puntos. El tiempo
         está en pausa mientras decidís.
       </p>
-      <div className="modal-actions">
+      <div className="arcade-modal-actions">
         <button
           type="button"
           className="arcade-button arcade-button-secondary"
